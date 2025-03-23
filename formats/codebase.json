@@ -1,0 +1,369 @@
+{
+  "files": {
+    "./DirectoryToConvert/PushToDB.py": {
+      "classes": [],
+      "functions": [
+        {
+          "id": "./DirectoryToConvert/PushToDB.py#Push_to_DB",
+          "name": "Push_to_DB",
+          "parameters": [
+            "filename"
+          ],
+          "return_type": null,
+          "calls": [],
+          "docstring": "Take the array of data with (fn_name,fn_code) and push it into a chromaDB , the fn takes in DB instance as input"
+        }
+      ],
+      "imports": [
+        {
+          "module": "sys",
+          "imported_items": [],
+          "is_from_import": false,
+          "alias": null
+        },
+        {
+          "module": "chromadb",
+          "imported_items": [],
+          "is_from_import": false,
+          "alias": null
+        },
+        {
+          "module": "codeToGraphConverter",
+          "imported_items": [],
+          "is_from_import": false,
+          "alias": null
+        }
+      ]
+    },
+    "./DirectoryToConvert/codeToGraphConverter.py": {
+      "classes": [
+        {
+          "id": "./DirectoryToConvert/codeToGraphConverter.py#CodeConverter",
+          "name": "CodeConverter",
+          "methods": [
+            {
+              "id": "./DirectoryToConvert/codeToGraphConverter.py#CodeConverter.__init__",
+              "name": "__init__",
+              "parameters": [
+                "self"
+              ],
+              "return_type": null,
+              "calls": [],
+              "docstring": null
+            },
+            {
+              "id": "./DirectoryToConvert/codeToGraphConverter.py#CodeConverter.visit_FunctionDef",
+              "name": "visit_FunctionDef",
+              "parameters": [
+                "self",
+                "node"
+              ],
+              "return_type": null,
+              "calls": [],
+              "docstring": "Visits the function definition node and appends the function name and the code to the chunks list."
+            },
+            {
+              "id": "./DirectoryToConvert/codeToGraphConverter.py#CodeConverter.visit_ClassDef",
+              "name": "visit_ClassDef",
+              "parameters": [
+                "self",
+                "node"
+              ],
+              "return_type": null,
+              "calls": [],
+              "docstring": "Visits the class definition node and appends the class name and the code to the chunks list."
+            },
+            {
+              "id": "./DirectoryToConvert/codeToGraphConverter.py#CodeConverter.convert",
+              "name": "convert",
+              "parameters": [
+                "filePath"
+              ],
+              "return_type": null,
+              "calls": [],
+              "docstring": "\"Take the file as input and return the code chunks"
+            }
+          ],
+          "inherits": [],
+          "docstring": null
+        }
+      ],
+      "functions": [
+        {
+          "id": "./DirectoryToConvert/codeToGraphConverter.py#__init__",
+          "name": "__init__",
+          "parameters": [
+            "self"
+          ],
+          "return_type": null,
+          "calls": [],
+          "docstring": null
+        },
+        {
+          "id": "./DirectoryToConvert/codeToGraphConverter.py#visit_FunctionDef",
+          "name": "visit_FunctionDef",
+          "parameters": [
+            "self",
+            "node"
+          ],
+          "return_type": null,
+          "calls": [],
+          "docstring": "Visits the function definition node and appends the function name and the code to the chunks list."
+        },
+        {
+          "id": "./DirectoryToConvert/codeToGraphConverter.py#visit_ClassDef",
+          "name": "visit_ClassDef",
+          "parameters": [
+            "self",
+            "node"
+          ],
+          "return_type": null,
+          "calls": [],
+          "docstring": "Visits the class definition node and appends the class name and the code to the chunks list."
+        },
+        {
+          "id": "./DirectoryToConvert/codeToGraphConverter.py#convert",
+          "name": "convert",
+          "parameters": [
+            "filePath"
+          ],
+          "return_type": null,
+          "calls": [],
+          "docstring": "\"Take the file as input and return the code chunks"
+        }
+      ],
+      "imports": [
+        {
+          "module": "ast",
+          "imported_items": [],
+          "is_from_import": false,
+          "alias": null
+        }
+      ]
+    },
+    "./DirectoryToConvert/GetFromDB.py": {
+      "classes": [],
+      "functions": [
+        {
+          "id": "./DirectoryToConvert/GetFromDB.py#Fetch_from_DB",
+          "name": "Fetch_from_DB",
+          "parameters": [
+            "query"
+          ],
+          "return_type": null,
+          "calls": [],
+          "docstring": "Take the query and fetch the ast from the DB"
+        }
+      ],
+      "imports": [
+        {
+          "module": "chromadb",
+          "imported_items": [],
+          "is_from_import": false,
+          "alias": null
+        }
+      ]
+    },
+    "./DirectoryToConvert/main.py": {
+      "classes": [],
+      "functions": [
+        {
+          "id": "./DirectoryToConvert/main.py#runLLM",
+          "name": "runLLM",
+          "parameters": [
+            "query"
+          ],
+          "return_type": null,
+          "calls": [],
+          "docstring": "Run the Local LLM model and pass the question to the model to get answer (automatically fetches context using fetch_from_DB function)"
+        }
+      ],
+      "imports": [
+        {
+          "module": "openai",
+          "imported_items": [
+            "OpenAI"
+          ],
+          "is_from_import": true,
+          "alias": null
+        },
+        {
+          "module": "PushToDB",
+          "imported_items": [
+            "Push_to_DB"
+          ],
+          "is_from_import": true,
+          "alias": null
+        },
+        {
+          "module": "GetFromDB",
+          "imported_items": [
+            "Fetch_from_DB"
+          ],
+          "is_from_import": true,
+          "alias": null
+        }
+      ]
+    },
+    "./DirectoryToConvert/FilesToConvert/sample.py": {
+      "classes": [],
+      "functions": [
+        {
+          "id": "./DirectoryToConvert/FilesToConvert/sample.py#fetch_website_data",
+          "name": "fetch_website_data",
+          "parameters": [
+            "url"
+          ],
+          "return_type": null,
+          "calls": [],
+          "docstring": "Fetch and parse website data."
+        },
+        {
+          "id": "./DirectoryToConvert/FilesToConvert/sample.py#process_data",
+          "name": "process_data",
+          "parameters": [
+            "soup"
+          ],
+          "return_type": null,
+          "calls": [],
+          "docstring": "Extract and process data from the parsed HTML."
+        },
+        {
+          "id": "./DirectoryToConvert/FilesToConvert/sample.py#main",
+          "name": "main",
+          "parameters": [],
+          "return_type": null,
+          "calls": [],
+          "docstring": null
+        }
+      ],
+      "imports": [
+        {
+          "module": "pandas",
+          "imported_items": [],
+          "is_from_import": false,
+          "alias": "pd"
+        },
+        {
+          "module": "requests",
+          "imported_items": [],
+          "is_from_import": false,
+          "alias": null
+        },
+        {
+          "module": "bs4",
+          "imported_items": [
+            "BeautifulSoup"
+          ],
+          "is_from_import": true,
+          "alias": null
+        },
+        {
+          "module": "datetime",
+          "imported_items": [
+            "datetime"
+          ],
+          "is_from_import": true,
+          "alias": null
+        },
+        {
+          "module": "logging",
+          "imported_items": [],
+          "is_from_import": false,
+          "alias": null
+        }
+      ]
+    }
+  },
+  "dependencies": [],
+  "indexes": {
+    "class_names": {
+      "CodeConverter": [
+        "./DirectoryToConvert/codeToGraphConverter.py#CodeConverter"
+      ]
+    },
+    "function_names": {
+      "Push_to_DB": [
+        "./DirectoryToConvert/PushToDB.py#Push_to_DB"
+      ],
+      "__init__": [
+        "./DirectoryToConvert/codeToGraphConverter.py#CodeConverter.__init__",
+        "./DirectoryToConvert/codeToGraphConverter.py#__init__"
+      ],
+      "visit_FunctionDef": [
+        "./DirectoryToConvert/codeToGraphConverter.py#CodeConverter.visit_FunctionDef",
+        "./DirectoryToConvert/codeToGraphConverter.py#visit_FunctionDef"
+      ],
+      "visit_ClassDef": [
+        "./DirectoryToConvert/codeToGraphConverter.py#CodeConverter.visit_ClassDef",
+        "./DirectoryToConvert/codeToGraphConverter.py#visit_ClassDef"
+      ],
+      "convert": [
+        "./DirectoryToConvert/codeToGraphConverter.py#CodeConverter.convert",
+        "./DirectoryToConvert/codeToGraphConverter.py#convert"
+      ],
+      "Fetch_from_DB": [
+        "./DirectoryToConvert/GetFromDB.py#Fetch_from_DB"
+      ],
+      "runLLM": [
+        "./DirectoryToConvert/main.py#runLLM"
+      ],
+      "fetch_website_data": [
+        "./DirectoryToConvert/FilesToConvert/sample.py#fetch_website_data",
+        "./DirectoryToConvert/FilesToConvert/sample.py#fetch_website_data"
+      ],
+      "process_data": [
+        "./DirectoryToConvert/FilesToConvert/sample.py#process_data",
+        "./DirectoryToConvert/FilesToConvert/sample.py#process_data"
+      ],
+      "main": [
+        "./DirectoryToConvert/FilesToConvert/sample.py#main",
+        "./DirectoryToConvert/FilesToConvert/sample.py#main"
+      ]
+    },
+    "imports": {
+      "sys": [
+        "./DirectoryToConvert/PushToDB.py"
+      ],
+      "chromadb": [
+        "./DirectoryToConvert/PushToDB.py",
+        "./DirectoryToConvert/GetFromDB.py"
+      ],
+      "codeToGraphConverter": [
+        "./DirectoryToConvert/PushToDB.py"
+      ],
+      "ast": [
+        "./DirectoryToConvert/codeToGraphConverter.py"
+      ],
+      "openai": [
+        "./DirectoryToConvert/main.py"
+      ],
+      "PushToDB": [
+        "./DirectoryToConvert/main.py"
+      ],
+      "GetFromDB": [
+        "./DirectoryToConvert/main.py"
+      ],
+      "pandas": [
+        "./DirectoryToConvert/FilesToConvert/sample.py",
+        "./DirectoryToConvert/FilesToConvert/sample.py"
+      ],
+      "requests": [
+        "./DirectoryToConvert/FilesToConvert/sample.py",
+        "./DirectoryToConvert/FilesToConvert/sample.py"
+      ],
+      "bs4": [
+        "./DirectoryToConvert/FilesToConvert/sample.py",
+        "./DirectoryToConvert/FilesToConvert/sample.py"
+      ],
+      "datetime": [
+        "./DirectoryToConvert/FilesToConvert/sample.py",
+        "./DirectoryToConvert/FilesToConvert/sample.py"
+      ],
+      "logging": [
+        "./DirectoryToConvert/FilesToConvert/sample.py",
+        "./DirectoryToConvert/FilesToConvert/sample.py"
+      ]
+    }
+  }
+}
