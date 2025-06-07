@@ -33,7 +33,8 @@ def fetch_repo_from_git_link(link):
         try:
             if clear_directory("./DirectoryToConvert"):
                 Repo.clone_from(link, "./DirectoryToConvert")
-                logger.info(f"The repo -- {link} has been cloned...")
+                dfs_traverse_directory("./DirectoryToConvert")
+                logger.info(f"The repo -- {link} has been cloned and vectorized")
                 return True
             else:
                 return False
