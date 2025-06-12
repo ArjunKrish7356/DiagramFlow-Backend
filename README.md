@@ -1,40 +1,162 @@
-# DiagramFlow
+# DiagramFlow Backend
 
-## Description
+[![Python](https://img.shields.io/badge/Python-3.10-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green.svg)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/Docker-Supported-blue.svg)](https://www.docker.com/)
 
-DiagramFlow is a tool that analyzes a Python codebase and extracts information about its structure, dependencies, and components. It parses Python files, identifies classes, functions, and imports, and stores this information in a JSON format. The code snippets are also pushed to ChromaDB for further analysis.
+## Overview
 
-## Functionality
+DiagramFlow Backend is a powerful codebase analysis service that intelligently extracts and processes information from Python repositories. Built with FastAPI, it provides RESTful endpoints for cloning Git repositories, parsing Python code structures, and generating interactive insights through an AI-powered chat interface.
 
-The application performs the following steps:
+## ✨ Key Features
 
-1.  **Directory Traversal:** Recursively traverses a specified directory (default: `./DirectoryToConvert`).
-2.  **Python File Parsing:** Parses Python files (`.py`) using the `parser_pyfile.py` module.
-3.  **Codebase Information Extraction:** Extracts key information, including class names, function names, and imports.
-4.  **ChromaDB Integration:** Pushes code snippets to ChromaDB, a vector database, for further analysis and retrieval.
-5.  **JSON Output:** Stores the extracted information in a JSON file named `codebase.json`.
+- **🔍 Intelligent Code Analysis**: Automatically parses Python files to extract classes, functions, and dependencies
+- **📊 Structured Data Export**: Generates comprehensive JSON reports of codebase structure
+- **🤖 AI-Powered Chat Interface**: Query your codebase using natural language through ChromaDB integration
+- **🌐 Git Repository Integration**: Clone and analyze repositories directly from Git URLs
+- **⚡ Fast API Backend**: High-performance REST API built with FastAPI
+- **🐳 Docker Ready**: Containerized deployment for easy scaling
 
-## Modules
+## 🏗️ Architecture
 
-*   `parser_pyfile.py`: This module is responsible for parsing Python files and extracting relevant information. It uses the `ast` module to create an Abstract Syntax Tree (AST) of the code, then traverses the AST to identify classes, functions, and imports. The extracted information is stored in a global `codebase` dictionary. It also integrates with ChromaDB by calling the `push_to_chromadb` function to store code snippets.
-*   `gitCloner.py`: (Potentially) used for cloning Git repositories (details need further investigation).
-*   `fetchFromChromaDB.py` and `pushToChromaDB.py`: These modules are used for interacting with ChromaDB. `pushToChromaDB.py` pushes code snippets to ChromaDB, while `fetchFromChromaDB.py` likely retrieves code snippets from ChromaDB based on certain queries.
-*   `ChatInterface.py`: Provides a chat interface for interacting with the codebase information.
-*   `server.py`: Runs a server to expose the functionality of the application.
+### Core Components
 
-## Usage
+- **`server.py`**: FastAPI application server with health checks and main endpoints
+- **`gitCloner.py`**: Git repository cloning and directory management utilities
+- **`parser_pyfile.py`**: Python AST-based code parsing and analysis engine
+- **`ChatInterface.py`**: AI-powered natural language interface for codebase queries
+- **`pushToChromaDB.py` & `fetchFromChromaDB.py`**: Vector database integration for semantic code search
+- **`main.py`**: Core directory traversal and analysis orchestration
 
-1.  Place the Python files you want to analyze in the `./DirectoryToConvert` directory.
-2.  Run the `backend/main.py` script.
-3.  The extracted codebase information will be stored in `codebase.json`.
-4.  Code snippets will be stored in ChromaDB in the `./chromadb` directory.
+### Data Flow
 
-## Further Investigation
+1. **Repository Ingestion**: Clone Git repositories or process local directories
+2. **Code Parsing**: Extract structural information using Python AST
+3. **Vector Storage**: Store code snippets in ChromaDB for semantic search
+4. **API Exposure**: Serve analysis results and chat functionality via REST endpoints
 
-The following aspects of the project require further investigation:
+## 🚀 Quick Start
 
-*   The exact purpose and functionality of `gitCloner.py`.
-*   The schema and structure of the `codebase.json` file.
-*   The role of ChromaDB in storing and retrieving codebase information.
-*   The implementation and features of the chat interface (`ChatInterface.py`).
-*   The API endpoints and functionality exposed by the server (`server.py`).
+### Prerequisites
+
+- Python 3.10
+- Git (for repository cloning)
+
+### Local Development Setup
+
+1. **Create and activate virtual environment**:
+   ```bash
+   python3.10 -m venv .venv
+   source .venv/bin/activate  # On macOS/Linux
+   # or
+   .venv\Scripts\activate     # On Windows
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Start the server**:
+   ```bash
+   fastapi run server.py
+   ```
+
+The API will be available at `http://localhost:8000` with interactive documentation at `http://localhost:8000/docs`.
+
+### Docker Deployment
+
+For production deployment or if you prefer containerized environments:
+
+1. **Build the Docker image**:
+   ```bash
+   docker build -t diagramflow-backend .
+   ```
+
+2. **Run the container**:
+   ```bash
+   docker run -p 8000:8000 diagramflow-backend
+   ```
+
+## 📡 API Endpoints
+
+### Health Check
+```http
+GET /health
+```
+Returns the service status.
+
+### Generate AI Response
+```http
+POST /generate
+Content-Type: application/json
+
+{
+  "question": "How does the authentication work in this codebase?"
+}
+```
+
+### Clone and Analyze Repository
+```http
+POST /clonerepo
+Content-Type: application/json
+
+{
+  "url": "https://github.com/username/repository.git"
+}
+```
+
+## 📁 Output Files
+
+- **`formats/codebase.json`**: Comprehensive structural analysis of the codebase
+- **`chromadb/`**: Vector database containing code embeddings for semantic search
+- **`logs/app.log`**: Application logs and analysis details
+
+## 🛠️ Development
+
+### Project Structure
+```
+DiagramFlow-Backend/
+├── server.py              # FastAPI application
+├── gitCloner.py           # Git operations
+├── parser_pyfile.py       # Code analysis
+├── ChatInterface.py       # AI chat interface
+├── pushToChromaDB.py      # Vector DB operations
+├── fetchFromChromaDB.py   # Vector DB queries
+├── main.py                # Core orchestration
+├── requirements.txt       # Python dependencies
+├── Dockerfile            # Container configuration
+└── formats/              # Output directory
+    └── codebase.json     # Analysis results
+```
+
+### Docker Configuration
+
+The included Dockerfile provides a lightweight, production-ready container:
+
+```dockerfile
+# Creating from Python 3.10 image
+FROM python:3.10
+
+WORKDIR /app
+
+COPY . .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the port
+EXPOSE 8000
+
+# Run FastAPI using Uvicorn
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to submit a Pull Request.
+
