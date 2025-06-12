@@ -8,6 +8,10 @@
 
 DiagramFlow Backend is a powerful codebase analysis service that intelligently extracts and processes information from Python repositories. Built with FastAPI, it provides RESTful endpoints for cloning Git repositories, parsing Python code structures, and generating interactive insights through an AI-powered chat interface.
 
+## Demo
+
+https://github.com/user-attachments/assets/5d8b3baf-1057-43db-9608-99a84bb6869d
+
 ## ✨ Key Features
 
 - **🔍 Intelligent Code Analysis**: Automatically parses Python files to extract classes, functions, and dependencies
